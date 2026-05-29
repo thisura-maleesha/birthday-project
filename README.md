@@ -1,4 +1,3 @@
-[README.md](https://github.com/user-attachments/files/28401659/README.md)
 <div align="center">
 
 # 🎂 Birthday Project 💕
@@ -12,9 +11,17 @@
 
 ---
 
-<img src="./images/anime-girl.png" width="120" style="border-radius: 50%;" />
+<img src="./images/anime-girl.png" width="120" />
 
 > *"From sharing childhood memories to sharing this campus journey, you've been my constant in everything."* 💙
+
+---
+
+## 🖼️ Preview
+
+| 🎊 Main Page | 💌 Love Letter | 📸 Memory Gallery |
+|:---:|:---:|:---:|
+| ![Main Page](./111.png) | ![Love Letter](./222.png) | ![Memory Gallery](./333.png) |
 
 ---
 
