@@ -16,6 +16,8 @@
 
 An interactive, animated birthday webpage built with pure HTML, CSS, and JavaScript. Features a multi-section experience with typewriter effects, a photo memory gallery, and background music — all designed to create a memorable personal surprise.
 
+<img src="./images/anime-girl.png" width="120" />
+
 > *"Some friendships are written in pencil — easily erased. Ours was written in permanent ink, sealed with every laugh, every tear, and every memory we've made together."*
 
 ---
