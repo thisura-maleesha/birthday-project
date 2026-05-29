@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maleesha Birthday</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Poppins:wght@400;600&family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+<style>
+/* =====================================================
+   box__mail popup styles
+   ===================================================== */
+
+.box__mail {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(3px);
+}
+
+.box__mail .mail__border {
+    position: relative;
+    background: #fff8f0;
+    border-radius: 24px;
+    padding: 32px 28px 28px;
+    width: min(900px, 94vw);
+    max-height: 90vh;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.22), 0 0 0 2px #f9d0d0;
+    display: flex;
+    flex-direction: column;
+    animation: mailPopIn 0.4s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+@keyframes mailPopIn {
+    from { opacity: 0; transform: scale(0.88) translateY(30px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.box__mail .mail__close {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #f9d0d0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #be185d;
+    z-index: 10;
+    transition: background 0.2s, transform 0.2s;
+}
+.box__mail .mail__close:hover {
+    background: #fbb6ce;
+    transform: scale(1.1);
+}
+
+.box__mail .title__mail {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    color: #be185d;
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 1.5px dashed #f9d0d0;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+/* two-column content area */
+.box__mail .mail__content {
+    display: flex;
+    gap: 20px;
+    flex: 1;
+    overflow: hidden;
+    min-height: 0;
+}
+
+/* Left: pink card */
+.box__mail .mail__left {
+    width: 42%;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+.box__mail .mail__left::-webkit-scrollbar { width: 4px; }
+.box__mail .mail__left::-webkit-scrollbar-thumb { background: #f9d0d0; border-radius: 4px; }
+
+.mail-card {
+    background: linear-gradient(135deg, #fff0f6, #fff8f0);
+    border: 1.5px solid #f9d0d0;
+    border-radius: 20px;
+    padding: 22px 20px;
+    box-shadow: 0 6px 24px rgba(190,24,93,0.07);
+}
+.mail-card .mc-img {
+    width: 70px; height: 70px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 10px;
+    border: 3px solid #fbb6ce;
+    box-shadow: 0 4px 12px rgba(190,24,93,0.15);
+}
+.mail-card .mc-img img { width:100%; height:100%; object-fit:cover; }
+.mail-card .mc-to {
+    text-align: center;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #be185d;
+    margin-bottom: 6px;
+}
+.mail-card .mc-hb {
+    text-align: center;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.6rem;
+    color: #9d174d;
+    margin-bottom: 12px;
+}
+.mail-card .mc-text {
+    font-size: 0.85rem;
+    line-height: 1.75;
+    color: #4a1942;
+    white-space: pre-line;
+}
+.mail-card .mc-cute {
+    margin-top: 12px;
+    text-align: center;
+}
+.mail-card .mc-cute img {
+    max-width: 100px;
+    border-radius: 12px;
+}
+.mail-card .mc-sig {
+    margin-top: 12px;
+    text-align: right;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.1rem;
+    color: #be185d;
+}
+
+/* Right: scrolling photos */
+.box__mail .mail__right {
+    width: 58%;
+    height: 480px;
+    overflow: hidden;
+    position: relative;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.mail__scroll {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px 0;
+    animation: mailScrollUp 30s linear infinite;
+    align-items: center;
+    will-change: transform;
+}
+
+.mail-photo {
+    width: 260px;
+    aspect-ratio: 9 / 16;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.12), 0 0 0 2px rgba(255,255,255,0.6);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    flex-shrink: 0;
+}
+.mail-photo img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+}
+.mail-photo:hover {
+    transform: scale(1.04) translateY(-4px);
+    box-shadow: 0 20px 44px rgba(190,24,93,0.16), 0 0 0 2px #fbb6ce;
+}
+.mail-photo:hover img { transform: scale(1.05); }
+
+@keyframes mailScrollUp {
+    0%   { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
+}
+
+/* floating hearts inside popup */
+.mail-heart-float {
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+    font-size: 16px;
+    opacity: 0;
+    animation: mailHeartUp 6s linear infinite;
+}
+@keyframes mailHeartUp {
+    0%   { transform: translateY(100%) scale(0.5); opacity: 0; }
+    20%  { opacity: 0.6; }
+    80%  { opacity: 0.3; }
+    100% { transform: translateY(-120%) scale(1.1); opacity: 0; }
+}
+
+/* mobile */
+@media (max-width: 650px) {
+    .box__mail .mail__content { flex-direction: column; overflow-y: auto; }
+    .box__mail .mail__left,
+    .box__mail .mail__right  { width: 100%; }
+    .box__mail .mail__right  { height: 300px; }
+    .mail-photo { width: 180px; }
+}
+</style>
+</head>
+
+<body>
+    <div id="wrapper">
+        <div class="flag__birthday">
+            <img src="./images/1.png" alt="" width="350" class="flag__left">
+            <img src="./images/1.png" alt="" width="350" class="flag__right">
+        </div>
+        <div class="content">
+            <div class="left">
+                <div class="title">
+                    <h1 class="happy">
+                        <span style="--t: 4s;">H</span>
+                        <span style="--t: 4.2s;">a</span>
+                        <span style="--t: 4.4s;">p</span>
+                        <span style="--t: 4.6s;">p</span>
+                        <span style="--t: 4.8s;">y</span>
+                    </h1>
+                    <h1 class="birthday">
+                        <span style="--t: 5s;">B</span>
+                        <span style="--t: 5.2s;">i</span>
+                        <span style="--t: 5.4s;">r</span>
+                        <span style="--t: 5.6s;">t</span>
+                        <span style="--t: 5.8s;">h</span>
+                        <span style="--t: 6s;">d</span>
+                        <span style="--t: 6.2s;">a</span>
+                        <span style="--t: 6.4s;">y</span>
+                    </h1>
+                    <div class="hat">
+                        <img src="./images/hat.png" alt="" width="130">
+                    </div>
+                </div>
+                <div class="date__of__birth">
+                    <span></span>
+                </div>
+                <div class="btn">
+                    <!-- Original letter button -->
+                    <button id="btn__letter">
+                        <div class="mail">
+                            Click Here Maleesha
+                            <i class="fa-regular fa-envelope"></i>
+                        </div>
+                    </button>
+
+                    <!-- NEW: mail/photos popup button -->
+                    <button id="btn__mail">
+                        <div class="mail">
+                            💌
+                        </div>
+                    </button>
+                </div>
+            </div>
+            <div class="right">
+                <div class="box__account">
+                    <div class="image">
+                        <img src="./images/anime-girl.png" alt="">
+                    </div>
+                    <div class="name">
+                        <i class="fa-solid fa-heart"></i>
+                        <span>Dear Maleesha</span>
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <div class="balloon_one">
+                        <img width="100px" src="./images/balloon1.png" alt="">
+                    </div>
+                    <div class="balloon_two">
+                        <img width="100px" src="./images/balloon2.png" alt="">
+                    </div>
+                </div>
+                <div class="cricle">
+                    <div class="text__cricle">
+                        <span style="--i: 1;">h</span>
+                        <span style="--i: 2;">a</span>
+                        <span style="--i: 3;">p</span>
+                        <span style="--i: 4;">p</span>
+                        <span style="--i: 5;">y</span>
+                        <span style="--i: 6;">-</span>
+                        <span style="--i: 7;">b</span>
+                        <span style="--i: 8;">i</span>
+                        <span style="--i: 9;">r</span>
+                        <span style="--i: 10;">t</span>
+                        <span style="--i: 11;">h</span>
+                        <span style="--i: 12;">d</span>
+                        <span style="--i: 13;">a</span>
+                        <span style="--i: 14;">y</span>
+                        <span style="--i: 15;">-</span>
+                    </div>
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- box__letter (original - unchanged) -->
+        <div class="box__letter">
+            <div class="letter__border">
+                <div class="close">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+                <div class="letter">
+                    <div class="title__letter"></div>
+                    <div class="content__letter">
+                        <div class="left">
+                            <img id="heart__letter" src="./images/heart_letter.png" alt="">
+                            <i class="fa-solid fa-heart heart heart_1" style="--t:1s;"></i>
+                            <i class="fa-solid fa-heart heart heart_2" style="--t:1.3s;"></i>
+                            <i class="fa-solid fa-heart heart heart_3" style="--t:1.6s;"></i>
+                            <i class="fa-solid fa-heart heart heart_4" style="--t:1.9s;"></i>
+                        </div>
+                        <div class="right">
+                            <div class="love__img">
+                                <img src="./images/love.png" alt="">
+                            </div>
+                            <div class="text__letter">
+                                <p></p>
+                            </div>
+                            <img id="mewmew" src="./images/mewmew.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             box__mail — NEW popup (💌 button)
+             Left: birthday message card
+             Right: scrolling photos
+             ============================================ -->
+        <div class="box__mail">
+            <div class="mail__border">
+
+                <div class="mail__close" id="mailClose">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+
+                <div class="title__mail">
+                    To You 💌
+                </div>
+
+                <div class="mail__content">
+
+                    <!-- Left pink card -->
+                    <div class="mail__left">
+                        <div class="mail-card">
+                            <div class="mc-img">
+                                <img src="./images/anime-girl.png" alt="">
+                            </div>
+                            <div class="mc-to">To: Maleesha 💖</div>
+                            <div class="mc-hb">Happy Birthday 🎂</div>
+                            <div class="mc-text">Dear Maleesha, 🌸
+
+Happy Birthday! Looking back, it's amazing how we've been together through thick and thin, since we were kids. From sharing childhood memories to sharing this campus journey, you've been my constant in everything. 🏫✨
+
+You are working so hard for your future, and on your special day, I want to wish you the absolute best in your studies and all your academic goals. I have no doubt that you will achieve every single dream you have. 🎓🚀 May this year bring you endless success and happiness. I'll always be here cheering for you! 💖</div>
+                            <div class="mc-cute">
+                                <img src="./images/cute1.png" alt="">
+                            </div>
+                            <div class="mc-sig">~ With Love 💙 ~</div>
+                        </div>
+                    </div>
+
+                    <!-- Right scrolling photos -->
+                    <div class="mail__right">
+                        <div class="mail__scroll">
+                            <div class="mail-photo"><img src="./images/11.png" alt="Memory 1"></div>
+                            <div class="mail-photo"><img src="./images/21.png" alt="Memory 2"></div>
+                            <div class="mail-photo"><img src="./images/31.png" alt="Memory 3"></div>
+                            <div class="mail-photo"><img src="./images/41.png" alt="Memory 4"></div>
+                            <div class="mail-photo"><img src="./images/51.png" alt="Memory 5"></div>
+                            <div class="mail-photo"><img src="./images/61.png" alt="Memory 6"></div>
+                            <div class="mail-photo"><img src="./images/71.png" alt="Memory 7"></div>
+                            <!-- seamless duplicate set -->
+                            <div class="mail-photo"><img src="./images/11.png" alt="Memory 1"></div>
+                            <div class="mail-photo"><img src="./images/21.png" alt="Memory 2"></div>
+                            <div class="mail-photo"><img src="./images/31.png" alt="Memory 3"></div>
+                            <div class="mail-photo"><img src="./images/41.png" alt="Memory 4"></div>
+                            <div class="mail-photo"><img src="./images/51.png" alt="Memory 5"></div>
+                            <div class="mail-photo"><img src="./images/61.png" alt="Memory 6"></div>
+                            <div class="mail-photo"><img src="./images/71.png" alt="Memory 7"></div>
+                        </div>
+                    </div>
+
+                </div><!-- /.mail__content -->
+            </div><!-- /.mail__border -->
+        </div><!-- /.box__mail -->
+
+        <div class="decorate_star star1" style="--t: 15s;"></div>
+        <div class="decorate_star star2" style="--t: 15.2s;"></div>
+        <div class="decorate_star star3" style="--t: 15.4s;"></div>
+        <div class="decorate_star star4" style="--t: 15.6s;"></div>
+        <div class="decorate_star star5" style="--t: 15.8s;"></div>
+        <div class="decorate_flower--one" style="--t: 15s;">
+            <img width="20" src="./images/decorate_flower.png" alt="">
+        </div>
+        <div class="decorate_flower--two" style="--t: 15.3s;">
+            <img width="20" src="./images/decorate_flower.png" alt="">
+        </div>
+        <div class="decorate_flower--three" style="--t: 15.6s;">
+            <img width="20" src="./images/decorate_flower.png" alt="">
+        </div>
+        <div class="decorate_bottom">
+            <img src="./images/decorate.png" alt="" width="100">
+        </div>
+        <div class="smiley__icon">
+            <img src="./images/smiley_icon.png" alt="" width="100">
+        </div>
+    </div><!-- /#wrapper -->
+
+    <!-- Audio -->
+    <audio id="birthdayAudio" loop>
+        <source src="birthday_song.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="letterAudio" loop>
+        <source src="letter_song.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="memoriesAudio" loop>
+        <source src="memories_song.mp3" type="audio/mpeg">
+    </audio>
+
+<script>
+    /* ── auto-play birthday audio on first interaction ── */
+    let audioUnlocked = false;
+    function unlockAudio() {
+        if (audioUnlocked) return;
+        audioUnlocked = true;
+        document.getElementById("birthdayAudio").play().catch(() => {});
+        document.removeEventListener('click',      unlockAudio, true);
+        document.removeEventListener('keydown',    unlockAudio, true);
+        document.removeEventListener('touchstart', unlockAudio, true);
+    }
+    document.addEventListener('click',      unlockAudio, { capture: true });
+    document.addEventListener('keydown',    unlockAudio, { capture: true });
+    document.addEventListener('touchstart', unlockAudio, { capture: true, passive: true });
+
+    /* ── text data ── */
+    const datetxt         = "28 January";
+    const datatxtletter   = "My love. You are a very special girl. I always silently thank you for coming into my life. Today, I wish you all the best, lots of health, and lots of joy. I always hope we will celebrate many more birthdays like this together. Happy birthday to you.💕";
+    const titleLetter     = "To you";
+
+    const charArrDate       = datetxt.split('');
+    const charArrDateLetter = datatxtletter.split('');
+    const charArrTitle      = titleLetter.split('');
+
+    let currentIndex       = 0;
+    let currentIndexLetter = 0;
+    let currentIndexTitle  = 0;
+    let letterOpened       = false;
+
+    const date__of__birth = document.querySelector(".date__of__birth span");
+    const text__letter    = document.querySelector(".text__letter p");
+
+    /* ── date animation ── */
+    setTimeout(function () {
+        let timeDatetxt = setInterval(function () {
+            if (currentIndex < charArrDate.length) {
+                date__of__birth.textContent += charArrDate[currentIndex++];
+            } else {
+                let star = document.createElement("i");
+                star.className = "fa-solid fa-star";
+                document.querySelector(".date__of__birth").prepend(star);
+                document.querySelector(".date__of__birth").appendChild(star.cloneNode(true));
+                clearInterval(timeDatetxt);
+            }
+        }, 100);
+    }, 12000);
+
+    let intervalContent, intervalTitle;
+
+    /* ══════════════════════════════════════════
+       btn__letter  →  box__letter popup
+    ══════════════════════════════════════════ */
+    document.getElementById("btn__letter").addEventListener("click", function (e) {
+        e.stopPropagation();
+
+        const mainAudio   = document.getElementById("birthdayAudio");
+        const letterAudio = document.getElementById("letterAudio");
+
+        setTimeout(function () {
+            mainAudio.pause();
+            mainAudio.currentTime = 0;
+            letterAudio.play();
+        }, 3000);
+
+        $(".box__letter").slideDown();
+
+        setTimeout(function () {
+            $(".letter__border").slideDown();
+            const hl = document.getElementById("heart__letter");
+            const mm = document.getElementById("mewmew");
+            const li = document.querySelector(".love__img");
+            if (hl) hl.classList.add("animationOp");
+            if (mm) mm.classList.add("animationOp");
+            if (li) li.classList.add("animationOp");
+            document.querySelectorAll(".heart").forEach(h => h.classList.add("animation"));
+        }, 1000);
+
+        if (!letterOpened) {
+            letterOpened = true;
+
+            setTimeout(function () {
+                const titleEl = document.querySelector(".title__letter");
+                titleEl.textContent = "";
+                intervalTitle = setInterval(function () {
+                    if (currentIndexTitle < charArrTitle.length) {
+                        titleEl.insertBefore(
+                            document.createTextNode(charArrTitle[currentIndexTitle++]),
+                            null
+                        );
+                    } else {
+                        let hIcon = document.createElement("i");
+                        hIcon.className = "fa-solid fa-heart";
+                        titleEl.appendChild(hIcon);
+                        clearInterval(intervalTitle);
+                    }
+                }, 100);
+            }, 2000);
+
+            setTimeout(function () {
+                intervalContent = setInterval(function () {
+                    if (currentIndexLetter < charArrDateLetter.length) {
+                        if (text__letter) text__letter.textContent += charArrDateLetter[currentIndexLetter++];
+                    } else {
+                        clearInterval(intervalContent);
+                    }
+                }, 50);
+            }, 6000);
+        }
+    });
+
+    /* box__letter close */
+    document.querySelector(".letter__border .close").addEventListener("click", function () {
+        $(".letter__border").slideUp();
+        setTimeout(() => $(".box__letter").slideUp(), 400);
+        const la = document.getElementById("letterAudio");
+        const ma = document.getElementById("birthdayAudio");
+        la.pause(); la.currentTime = 0;
+        ma.play();
+    });
+
+    /* ══════════════════════════════════════════
+       btn__mail  →  box__mail popup
+    ══════════════════════════════════════════ */
+    document.getElementById("btn__mail").addEventListener("click", function (e) {
+        e.stopPropagation();
+
+        const mainAudio     = document.getElementById("birthdayAudio");
+        const memoriesAudio = document.getElementById("memoriesAudio");
+        mainAudio.pause();
+        mainAudio.currentTime = 0;
+        memoriesAudio.play().catch(() => {});
+
+        const boxMail = document.querySelector(".box__mail");
+        boxMail.style.display = "flex";
+        requestAnimationFrame(() => { boxMail.style.opacity = "1"; });
+
+        startMailHearts();
+    });
+
+    /* box__mail close */
+    document.getElementById("mailClose").addEventListener("click", function (e) {
+        e.stopPropagation();
+
+        const boxMail = document.querySelector(".box__mail");
+        boxMail.style.display = "none";
+
+        const memoriesAudio = document.getElementById("memoriesAudio");
+        const mainAudio     = document.getElementById("birthdayAudio");
+        memoriesAudio.pause();
+        memoriesAudio.currentTime = 0;
+        mainAudio.play().catch(() => {});
+
+        stopMailHearts();
+    });
+
+    /* ══════════════════════════════════════════
+       Wheel scroll for mail__right
+    ══════════════════════════════════════════ */
+    const mailRight  = document.querySelector(".mail__right");
+    const mailScroll = document.querySelector(".mail__scroll");
+    let resumeTimer  = null;
+
+    mailRight.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        const mat = new DOMMatrix(getComputedStyle(mailScroll).transform);
+        let   cur = mat.m42;
+
+        mailScroll.style.animation = 'none';
+        mailScroll.style.transform = `translateY(${cur}px)`;
+
+        cur -= e.deltaY * 0.5;
+
+        const half = mailScroll.scrollHeight / 2;
+        if (cur > 0)     cur = 0;
+        if (cur < -half) cur = -half + 2;
+
+        mailScroll.style.transform = `translateY(${cur}px)`;
+
+        clearTimeout(resumeTimer);
+        resumeTimer = setTimeout(() => {
+            const pct   = Math.abs(cur) / half;
+            const delay = -(pct * 30).toFixed(2);
+            mailScroll.style.transform = '';
+            mailScroll.style.animation = `mailScrollUp 30s linear ${delay}s infinite`;
+        }, 2000);
+    }, { passive: false });
+
+    /* ── floating hearts ── */
+    let mailHeartInterval = null;
+
+    function spawnMailHeart() {
+        const border = document.querySelector(".mail__border");
+        if (!border) return;
+        const el = document.createElement("div");
+        el.classList.add("mail-heart-float");
+        el.textContent = ['💖','💕','💗','✨','🌸'][Math.floor(Math.random() * 5)];
+        el.style.left              = Math.random() * 90 + "%";
+        el.style.bottom            = "0";
+        el.style.fontSize          = (Math.random() * 8 + 12) + "px";
+        el.style.animationDuration = (Math.random() * 3 + 4) + "s";
+        el.style.animationDelay    = "0s";
+        border.appendChild(el);
+        setTimeout(() => el.remove(), 8000);
+    }
+
+    function startMailHearts() {
+        if (mailHeartInterval) return;
+        mailHeartInterval = setInterval(spawnMailHeart, 700);
+    }
+    function stopMailHearts() {
+        clearInterval(mailHeartInterval);
+        mailHeartInterval = null;
+        document.querySelectorAll(".mail-heart-float").forEach(h => h.remove());
+    }
+</script>
+</body>
+</html>
