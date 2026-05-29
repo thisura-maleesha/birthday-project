@@ -13,7 +13,7 @@
 
 <img src="./images/anime-girl.png" width="120" />
 
-> *"From sharing childhood memories to sharing this campus journey, you've been my constant in everything."* 💙
+> *"Some friendships are written in pencil — easily erased. Ours was written in permanent ink, sealed with every laugh, every tear, and every memory we've made together. Happy Birthday to the one who made my story worth telling." 💙* 
 
 ---
 
